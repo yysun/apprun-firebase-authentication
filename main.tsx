@@ -1,7 +1,19 @@
 import app from 'apprun';
-const model = 'Hello world - AppRun';
-const view = (state) => <h1>{state}</h1>;
-const update = {
-}
+import home from './home';
+import about from './about';
+import contact from './contact';
+import signin from './signin';
+
 const element = document.getElementById('my-app');
-app.start(element, model, view, update);
+
+new signin().start(element);
+new home().start(element);
+new about().start(element);
+new contact().start(element);
+
+app.on('//', route => {
+  const menus = document.querySelectorAll('.navbar-nav li');
+  for (let i = 0; i < menus.length; ++i) menus[i].classList.remove('active');
+  const item = document.querySelector(`[href='${route}']`);
+  item && item.parentElement.classList.add('active');
+})

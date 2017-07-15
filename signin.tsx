@@ -1,33 +1,20 @@
 import app, { Component } from 'apprun';
-
-function signIn(user: string, pass: string): Promise<boolean> {
-  const ok = user === '1@1';
-  return new Promise<boolean>(r => {
-    window.setTimeout(() => {
-      r(ok)
-    }, 2000)
-  })
-}
-
+import { signIn } from './authentication';
 export default class homeComponent extends Component {
   state = { signedIn: false };
 
   view = (state) => {
+    if (state.signedIn) return;
+    
     if (state instanceof Promise) {
       return <div>Signing in ...</div>
     }
-    if (state.signedIn) {
-      return <div>
-        <h2>Welcome, {state.user}
-          <button type="submit" className="btn btn-default pull-right" onclick={() => this.run('signout')}>Sign Out</button>
-        </h2>
-      </div>
-    }
+
     return <div>
       {state.message && <div className="alert alert-danger">
         {state.message}
       </div>}
-      <form className="form-horizontal" onsubmit={() => this.run('signin')} >
+      <form className="form-horizontal" onsubmit={e => this.run('signin', e)} >
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-5">
             <h2>Sign in</h2>
@@ -65,11 +52,14 @@ export default class homeComponent extends Component {
 
   update = {
     '#signin': state => ({ signIn: false }),
-    'signin': async state => {
+    'signin': async (state, e) => {
+      e.preventDefault();
       const user = (document.getElementById('inputEmail3') as HTMLInputElement).value;
       const pass = (document.getElementById('inputPassword3') as HTMLInputElement).value;
       const signedIn = await signIn(user, pass);
       const message = signedIn ? '' : 'Sign in failed. Please try again.';
+
+      app.run('#auth', { user, signedIn });
       return { ...state, signedIn, user, message }
     },
     'signout': state => ({ ...state, signedIn: false })
