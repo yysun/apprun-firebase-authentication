@@ -59,9 +59,10 @@ export default class homeComponent extends Component {
       const signedIn = await signIn(user, pass);
       const message = signedIn ? '' : 'Sign in failed. Please try again.';      
       if (signedIn) {
-        console.log('route to:', state.hash)
-        app.run(state.hash);
-        app.run('//', state.hash);
+        const hash = state.hash || '#';
+        console.log('return to:', hash)
+        app.run(hash);
+        app.run('//', hash);
       }
       return { ...state, signedIn, user, message }
     },

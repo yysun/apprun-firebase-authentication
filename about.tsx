@@ -5,20 +5,22 @@ import { user, authorize } from './authentication';
 @authorize
 export default class aboutComponent extends Component {
 
-  state = 'about';
+  auth = () => user && user.startsWith('1');
+
+  state = {
+    content: 'about'
+  }
 
   view = (state) => {
     return <div>
       <Header />
       <div className="container">
-        <h1>{state} - {user} </h1>
+        <h1>{state.content} - {user} </h1>
       </div>
     </div>
   }
 
   update = {
-    '#about': state => state,
+    '#about': state => ({ ...state, authorized: this.auth() }),
   }
 }
-
-// export default authorize(aboutComponent);

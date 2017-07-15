@@ -1,35 +1,32 @@
-
 import app, { Component } from 'apprun';
 
-export let authenticated = false;
 export let user = null;
 
-export function signIn(username: string, pass: string): Promise<boolean> {
+export function signIn(username: string, pass: string): Promise<string> {
   user = null;
-  authenticated = username === '1@1';
-  return new Promise<boolean>(resolve => {
+  return new Promise<string>(resolve => {
     window.setTimeout(() => {
       user = username;
-      resolve(authenticated);
+      resolve(user);
     }, 200)
   })
 }
 
-
-export function authorize(componentClass) {
+export function authorize(componentClass) : any {
   const component = new componentClass();
   return class AuthorizedComponent extends Component {
+
     state = component.model || component.state;
 
     view = (state) => {
-      if (!authenticated) {
-        app.run('#signin', location.hash || '#');
+      if (!state.authorized) {
+        app.run('#signin', location.hash);
         return;
       }
       return component.view(state);
     }
-
     update = component.update;
+    
   }
 }
 
