@@ -1,15 +1,17 @@
 import app, { Component } from 'apprun';
 import Header from './header';
-import { authorize } from './authentication';
+import { user, authorize } from './authentication';
 
-export default class aboutComponent extends Component {
+// @authorize
+class aboutComponent extends Component {
+
   state = 'about';
 
   view = (state) => {
     return <div>
       <Header />
       <div className="container">
-        <h1>{state}</h1>
+        <h1>{state} - {user} </h1>
       </div>
     </div>
   }
@@ -18,3 +20,5 @@ export default class aboutComponent extends Component {
     '#about': state => state,
   }
 }
+
+export default authorize(new aboutComponent());

@@ -51,15 +51,18 @@ export default class homeComponent extends Component {
   }
 
   update = {
-    '#signin': state => ({ signIn: false }),
+    '#signin': (state, hash) => ({ signIn: false, hash }),
     'signin': async (state, e) => {
       e.preventDefault();
       const user = (document.getElementById('inputEmail3') as HTMLInputElement).value;
       const pass = (document.getElementById('inputPassword3') as HTMLInputElement).value;
       const signedIn = await signIn(user, pass);
-      const message = signedIn ? '' : 'Sign in failed. Please try again.';
-
-      app.run('#auth', { user, signedIn });
+      const message = signedIn ? '' : 'Sign in failed. Please try again.';      
+      if (signedIn) {
+        console.log('route to:', state.hash)
+        app.run(state.hash);
+        app.run('//', state.hash);
+      }
       return { ...state, signedIn, user, message }
     },
     'signout': state => ({ ...state, signedIn: false })
