@@ -2,7 +2,8 @@ import app, { Component } from 'apprun';
 import Header from './header';
 import { user, authorize } from './authentication';
 
-class homeComponent extends Component {
+@authorize
+export default class homeComponent extends Component {
 
   state = 'home';
 
@@ -20,4 +21,4 @@ class homeComponent extends Component {
   }
 }
 
-export default authorize(new homeComponent());
+// export default authorize(homeComponent);

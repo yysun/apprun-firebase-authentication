@@ -16,8 +16,8 @@ export function signIn(username: string, pass: string): Promise<boolean> {
 }
 
 
-export function authorize(component) {
-  
+export function authorize(componentClass) {
+  const component = new componentClass();
   return class AuthorizedComponent extends Component {
     state = component.model || component.state;
 

@@ -2,8 +2,8 @@ import app, { Component } from 'apprun';
 import Header from './header';
 import { user, authorize } from './authentication';
 
-// @authorize
-class aboutComponent extends Component {
+@authorize
+export default class aboutComponent extends Component {
 
   state = 'about';
 
@@ -21,4 +21,4 @@ class aboutComponent extends Component {
   }
 }
 
-export default authorize(new aboutComponent());
+// export default authorize(aboutComponent);
