@@ -5,10 +5,10 @@ export default class homeComponent extends Component {
 
   view = (state) => {
     if (state.signedIn) return;
-    
-    if (state instanceof Promise) {
-      return <div>Signing in ...</div>
-    }
+
+    // if (state instanceof Promise) {
+    //   return <div>Signing in ...</div>
+    // }
 
     return <div>
       {state.message && <div className="alert alert-danger">
@@ -57,12 +57,12 @@ export default class homeComponent extends Component {
       const user = (document.getElementById('inputEmail3') as HTMLInputElement).value;
       const pass = (document.getElementById('inputPassword3') as HTMLInputElement).value;
       const signedIn = await signIn(user, pass);
-      const message = signedIn ? '' : 'Sign in failed. Please try again.';      
+      const message = signedIn ? '' : 'Sign in failed. Please try again.';
       if (signedIn) {
         const hash = state.hash || '#';
         console.log('return to:', hash)
-        app.run(hash);
-        app.run('//', hash);
+        app.run('#auth', user);
+        app.run('route', hash)
       }
       return { ...state, signedIn, user, message }
     },

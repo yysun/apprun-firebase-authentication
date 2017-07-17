@@ -12,21 +12,10 @@ export function signIn(username: string, pass: string): Promise<string> {
   })
 }
 
-export function authorize(componentClass) : any {
-  const component = new componentClass();
-  return class AuthorizedComponent extends Component {
+export function authorize(view: Function) : Function {
 
-    state = component.model || component.state;
-
-    view = (state) => {
-      if (!state.authorized) {
-        app.run('#signin', location.hash);
-        return;
-      }
-      return component.view(state);
-    }
-    update = component.update;
-    
+  return (state) => {
+    if (!state.authorized) return app.run('#signin', location.hash) && false;
+    return view(state);
   }
 }
-
