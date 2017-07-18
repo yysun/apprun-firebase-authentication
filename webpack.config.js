@@ -9,6 +9,10 @@ module.exports = {
   resolve: {
     extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
   },
+  externals: {
+    'firebase': 'firebase',
+    'firebaseui': 'firebaseui'
+  },
   module: {
     rules: [
       { test: /.tsx?$/, loader: 'ts-loader' }
