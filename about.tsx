@@ -1,19 +1,19 @@
 import app, { Component } from 'apprun';
-import { user, authorize } from './authentication';
+import { user } from './firebase-auth';
 
 export default class aboutComponent extends Component {
 
-  auth = () => user && user.startsWith('1');
+  auth = () => !!user;
 
   state = {
     content: 'about'
   }
 
-  view = authorize(state => {
+  view = state => {
     return state.authorized && <div>
-      <h1>{state.content} - {user} </h1>
+      <h1>{state.content} - {user.displayName} </h1>
     </div>
-  })
+  }
 
   update = {
     '#about': state => ({ ...state, authorized: this.auth() }),
