@@ -3,11 +3,12 @@ import home from './home';
 import about from './about';
 import contact from './contact';
 import signin from './signin';
+import { user, signOut } from './authentication';
 
 const app_id = 'my-app';
 const main_id = 'main';
 
-new signin().mount(app_id);
+new signin().mount(main_id);
 new home().mount(main_id);
 new about().mount(main_id);
 new contact().mount(main_id);
@@ -40,6 +41,10 @@ class AppComponent extends Component {
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
+          <ul className="nav navbar-nav navbar-right">
+            {user ? <li><a href="#signout">Sign Out</a></li>
+                  : <li><a href="#signin">Sign In</a></li>}
+          </ul>
         </div>
       </div>
     </nav>
@@ -47,7 +52,11 @@ class AppComponent extends Component {
   </div>
 
   update = {
-    '#auth': state => state
+    '#auth': state => state,
+    '#signout': state => {
+      signOut();
+      return state;
+    }
   }
 
 }

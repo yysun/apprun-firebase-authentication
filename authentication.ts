@@ -12,10 +12,15 @@ export function signIn(username: string, pass: string): Promise<string> {
   })
 }
 
-export function authorize(view: Function) : Function {
+export function signOut() {
+  user = null;
+}
 
+export function authorize(view: Function) : Function {
   return (state) => {
     if (!state.authorized) return app.run('#signin', location.hash) && false;
     return view(state);
   }
 }
+
+
