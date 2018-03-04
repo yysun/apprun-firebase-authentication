@@ -1,23 +1,32 @@
 {
   "name": "apprun-firebase-authentication",
-  "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "version": "1.0.0",
+  "description": "* Use _npm start_ to start the dev server * Use _npm run build_ to build for production",
+  "main": "app.js",
+  "dependencies": {
+    "apprun": "^1.9.1"
+  },
+  "devDependencies": {
+    "ts-loader": "^4.0.1",
+    "typescript": "^2.7.2",
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.10",
+    "webpack-dev-server": "^3.1.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server",
-    "build": "webpack -p"
+    "start": "webpack-dev-server --mode development",
+    "build": "webpack -p --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yysun/apprun-firebase-authentication.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "apprun": "^1.4.0"
+  "bugs": {
+    "url": "https://github.com/yysun/apprun-firebase-authentication/issues"
   },
-  "devDependencies": {
-    "ts-loader": "^2.2.2",
-    "typescript": "^2.4.1",
-    "webpack": "^3.2.0",
-    "webpack-dev-server": "^2.5.1"
-  }
+  "homepage": "https://github.com/yysun/apprun-firebase-authentication#readme"
 }
