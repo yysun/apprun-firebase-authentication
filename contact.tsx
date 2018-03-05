@@ -1,5 +1,5 @@
 import app, {Component} from 'apprun';
-import { user, authorize } from './authentication';
+import { user } from './auth';
 
 export default class contactComponent extends Component {
   state = 'contact';
