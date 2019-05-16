@@ -1,6 +1,6 @@
 import app, { Component } from 'apprun';
 
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 import * as firebaseui from 'firebaseui';
 
 const config = {

@@ -1,24 +1,22 @@
 const path = require('path');
 module.exports = {
   entry: {
-    'app': './main.tsx',
+    'dist/app': './src/main.tsx',
   },
   output: {
-    filename: '[name].js'
+    filename: '[name].js',
+    path: path.resolve(__dirname)
   },
   resolve: {
-    extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
-  },
-  externals: {
-    'firebase': 'firebase',
-    'firebaseui': 'firebaseui'
+    extensions: ['.ts', '.tsx', '.js']
   },
   module: {
     rules: [
       { test: /.tsx?$/, loader: 'ts-loader' }
     ]
   },
-  devtool: "source-map",
   devServer: {
-  }
+    open: true
+  },
+  devtool: 'source-map'
 }
