@@ -9,7 +9,8 @@ const config = {
   databaseURL: "https://apprun-demo.firebaseio.com",
   projectId: "apprun-demo",
   storageBucket: "apprun-demo.appspot.com",
-  messagingSenderId: "1024119839929"
+  messagingSenderId: "1024119839929",
+  appId: "1:1024119839929:web:dc68079183e65d25"
 };
 firebase.initializeApp(config);
 
